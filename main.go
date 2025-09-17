@@ -8,8 +8,8 @@ import (
 )
 
 func main() {
-	dir, _ := os.Getwd()
-	fmt.Println("Current working dir:", dir)
+	// dir, _ := os.Getwd()
+	// fmt.Println("Current working dir:", dir)
 	f, err := os.Open("message.txt")
 	if err != nil {
 		log.Fatal("error", "error", err)
@@ -24,14 +24,17 @@ func main() {
 		}
 		str = ""
 		data = data[:n]
-		if i := bytes.IndexByte(data, '\n'); i != 0 {
+		if i := bytes.IndexByte(data, '\n'); i != -1 {
 			str += string(data[:i])
 			data = data[i+1:]
 			fmt.Printf("read: %s\n", str)
 			str = ""
 		}
+
+		str += string(data)
+	}
+	if len(str) != 0 {
+		fmt.Printf("read: %s\n", str)
 	}
 
 }
-
-// elts checl
